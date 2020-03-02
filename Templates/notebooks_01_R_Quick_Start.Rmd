@@ -1,0 +1,41 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+Angostura Big Query ETL
+
+Note to user
+  - This code uses Angostura to access the database of Medicos Por La Salud.
+  - You will need to grant access to Google BigQuery with your google account. 
+    - Once you run the code, click yes to grant permission to Google to manage BigQuery.
+  - If successfull, it will store the contents of the database in the variable name 'df'.
+  - You can then perform the rest of your analysis using the variable 'df'.
+    - Create another chunk once the code is exectuted.
+    
+    
+  ** To run the chunk below (i.e the grey region), press Ctrl + Shift + Enter together
+
+```{r}
+
+# Library dependencies
+if (!require("bigrquery")) install.packages("bigrquery")
+
+# Authenticate user
+bq_auth(path="https://storage.googleapis.com/angostura-public/hult-hackathon-key.json")
+
+# SQL request and store into dataframe
+project_id <- "event-pipeline"
+sql <- 'SELECT * from `angostura_dev.eh_health_survey_response`'
+df <- query_exec(sql, project_id, use_legacy_sql = FALSE)
+
+```
+
+Perform your analysis from this point on..
+
+```{r}
+
+```
+
+
